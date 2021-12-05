@@ -1,0 +1,26 @@
+<div id="modalDeleteDomain{{ domain.id }}" class="modal fade">
+    <div class="modal-dialog modal-dialog-sm">
+        <form action="{% url 'shortlink:delete_domain' domain.id %}" method="post">
+            {% csrf_token %}
+            <div class="modal-content">
+                <!-- Заголовок модального окна -->
+                <div class="modal-header">
+                    <h4 class="modal-title" align="left">Delete domain?</h4>
+                </div>
+                <!-- Основное содержимое модального окна -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <h6>{{ domain.domain_name }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Футер модального окна -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

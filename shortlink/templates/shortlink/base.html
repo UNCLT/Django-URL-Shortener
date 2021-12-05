@@ -1,0 +1,39 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" , initial-scale=1, shrink-to-fit=no>
+    <title>My short URLs</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    <link rel="stylesheet" href="{% static 'shortlink/css/shortlink.css' %}">
+</head>
+<body>
+
+
+{% include 'shortlink/navbar.html' %}
+
+
+<main role="main" class="container">
+    <div class="pb-2 mb-2">
+        {% block page_header %}{% endblock page_header %}
+    </div>
+
+    <div>
+
+        {% include 'shortlink/messages.html' %}
+        {% block content %}{% endblock content %}
+    </div>
+
+    <div>
+        {% include 'shortlink/footer.html' %}
+    </div>
+</main>
+
+</body>
+
+</html>

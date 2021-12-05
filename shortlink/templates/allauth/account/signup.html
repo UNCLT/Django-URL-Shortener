@@ -1,0 +1,48 @@
+{% extends "account/base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+    <br>
+    <h1>{% trans "Sign Up" %}</h1>
+
+    <table>
+        <tr>
+            <td>
+                {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in </a>or log in
+                    with&nbsp{% endblocktrans %}
+            </td>
+            <td>
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-4">
+                {{ form|crispy }}
+            </div>
+        </div>
+        <div>
+            <p>
+                By pressing <b>Sign Up</b> button you agree with
+                <a href="{% url 'shortlink:terms_of_use' %}">Terms of Use</a>
+                and
+                <a href="{% url 'shortlink:privacy_policy' %}">Privacy Policy</a>.
+            </p>
+        </div>
+
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button class="btn btn-warning" type="submit">{% trans "Sign Up" %}</button>
+    </form>
+
+{% endblock %}

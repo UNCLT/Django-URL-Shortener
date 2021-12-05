@@ -1,0 +1,97 @@
+{% extends "shortlink/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <br>
+    <center><h4>shorten your most useful URLs</h4></center>
+
+    <br>
+
+    <center>
+        <form action="{% url 'shortlink:index' %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-3">
+                    {{ form.title|as_crispy_field }}
+                </div>
+                <div class="col-4">
+                    {{ form.source_link|as_crispy_field }}
+                </div>
+                <div class="col-2">
+                    {{ form.domain|as_crispy_field }}
+                </div>
+                <div class="col-3">
+                    {{ form.slug|as_crispy_field }}
+                </div>
+            </div>
+
+            <button class="btn btn-warning" type="submit">
+                create link
+            </button>
+
+        </form>
+    </center>
+
+    <br>
+
+    {% if my_links_list %}
+        {% for link in my_links_list %}
+            <table align="center">
+                <tr>
+
+                    <td valign="top" align="center">
+                        <form action="{% url 'shortlink:to_the_top' link.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-secondary btn-sm" type="submit">
+                                Top
+                            </button>
+                        </form>
+                    </td>
+
+                    <td valign="top" align="center">
+                        <a href="{% url 'shortlink:edit_link' link.pk %}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                    </td>
+
+                    <td align="center">
+                        <text class="title">{{ link.title }}</text>
+                    </td>
+
+                    <td align="center">
+                        <a class="sourcelink" href="{{ link.source_link }}">{{ link.source_link }}</a>
+                    </td>
+
+                    <td align="center">
+                        <a class="shortlink" , href="{{ link.source_link }}">http://ya.link/{{ link.slug }}</a>
+                    </td>
+
+                    <td valign="top" align="center">
+                        <form action="{% url 'shortlink:copy_link' link.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-secondary btn-sm" type="submit">
+                                Copy
+                            </button>
+                        </form>
+                    </td>
+
+                    <td valign="top" align="center">
+                        <a href="#modalDeleteLink" class="btn btn-outline-danger btn-sm"
+                           data-toggle="modal" data-target="#modalDeleteLink{{ link.id }}">Delete</a>
+                    </td>
+
+                </tr>
+            </table>
+            <br>
+
+            <!--Модальное окно подтверждения удаления ссылки-->
+            {% include 'shortlink/delete_link.html' %}
+
+        {% endfor %}
+    {% else %}
+        <center>Your shortened URLs will appear here. Create one!</center>
+    {% endif %}
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends "shortlink/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h1>Create your domains</h1>
+    <br>
+    <br>
+
+
+    <form action="{% url 'shortlink:manage_domains' %}" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-3">
+                {{ form.domain_name|as_crispy_field }}
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+
+                    <button class="btn btn-warning" type="submit">
+                        create domain
+                    </button>
+
+                </td>
+                <td>
+                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button" aria-pressed="true">back to URLs</a>
+                </td>
+            </tr>
+        </table>
+
+
+    </form>
+
+    <br>
+    {% if my_domains_list %}
+        {% for domain in my_domains_list %}
+            <table>
+                <tr>
+                    <td align="center">
+                        <text class="domain">{{ domain.domain_name }}</text>
+                    </td>
+
+                    <td valign="top" align="center">
+                        <a href="#modalDeleteDomain" class="btn btn-outline-danger btn-sm"
+                                                       data-toggle="modal" data-target="#modalDeleteDomain{{ domain.id }}">Delete</a>
+                    </td>
+
+                </tr>
+            </table>
+            <br>
+
+            <!--Модальное окно подтверждения удаления домена-->
+            {% include 'shortlink/delete_domain.html' %}
+        {% endfor %}
+    {% else %}
+        Your domains will appear here. Create one!
+    {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends "shortlink/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h1>Contact us with the feedback form down below.</h1>
+    <br>
+    <form action="{% url 'shortlink:contact_us' %}" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-4">
+                {{ form.name|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                {{ form.email|as_crispy_field }}
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                {{ form.subject|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-5">
+                {{ form.message_text|as_crispy_field }}
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    <button class="btn btn-warning" type="submit">
+                        send message
+                    </button>
+                </td>
+                <td>
+                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
+                       aria-pressed="true">back to mainpage</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+{% endblock content %}

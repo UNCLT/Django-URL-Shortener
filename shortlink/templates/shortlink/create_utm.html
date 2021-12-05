@@ -1,0 +1,76 @@
+{% extends "shortlink/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h1>Create UTM link for your campaign</h1>
+    <br>
+    <br>
+
+    <form action="{% url 'shortlink:create_utm' %}" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-4">
+                {{ form.homepage|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                {{ form.utm_source|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ form.utm_content|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                {{ form.utm_medium|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ form.utm_term|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                {{ form.utm_campaign|as_crispy_field }}
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+
+                    <button class="btn btn-warning" type="submit">
+                        create UTM link
+                    </button>
+
+                </td>
+                <td>
+                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button" aria-pressed="true">back to URLs</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br>
+    <br>
+
+
+    {% if utm_url %}
+        <div class="container">
+            <textarea class="form-control" cols="80" rows="5">{{ utm_url }}</textarea>
+        </div>
+        <br>
+
+
+    {% else %}
+        <center>Your UTM link will appear here. Create one!</center>
+    {% endif %}
+
+
+
+{% endblock content %}

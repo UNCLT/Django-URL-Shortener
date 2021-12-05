@@ -1,0 +1,48 @@
+<div id="modalDeleteLink{{ link.id }}" class="modal fade">
+    <div class="modal-dialog modal-dialog-sm">
+        <form action="{% url 'shortlink:delete_link' link.id %}" method="post">
+            {% csrf_token %}
+            <div class="modal-content">
+                <!-- Заголовок модального окна -->
+                <div class="modal-header">
+                    <h4 class="modal-title" align="left">Detete link?</h4>
+                </div>
+                <!-- Основное содержимое модального окна -->
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-4">
+                            <text>Title:</text>
+                        </div>
+                        <div class="col-4">
+                            <h6>{{ link.title }}</h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <text>URL:</text>
+                        </div>
+                        <div class="col-4">
+                            <h6><p>{{ link.source_link }}</p></h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <text>Short link:</text>
+                        </div>
+                        <div class="col-4">
+                            <h6>ya.link/{{ link.slug }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Футер модального окна -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
