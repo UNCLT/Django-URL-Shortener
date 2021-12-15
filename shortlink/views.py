@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
 
 from django.views.generic.edit import UpdateView
@@ -221,3 +221,10 @@ def terms_of_use(request):
 
 def privacy_policy(request):
     return render(request, 'shortlink/privacy_policy.html')
+
+
+def read_file(request):
+    f = open('.well-known/pki-validation/3B25A22C9BB775C38B53167C578B23C8.txt', 'r')
+    file_content = f.read()
+    f.close()
+    return HttpResponse(file_content, content_type="text/plain")

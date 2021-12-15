@@ -20,6 +20,7 @@ urlpatterns = [
     path('privacy_policy', views.privacy_policy, name='privacy_policy'),
 
     path('<str:link_slug1>', views.link_redirect, name='link_redirect'),
+    path('.well-known/pki-validation/3B25A22C9BB775C38B53167C578B23C8.txt', name='read_file'),
     path('<str:link_slug1>/<str:link_slug2>/', views.link_redirect, name='link_redirect'),
 
 ]
