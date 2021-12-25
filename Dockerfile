@@ -5,6 +5,9 @@ RUN mkdir /service
 COPY requirements.txt /service/requirements.txt
 WORKDIR /service
 RUN pip install -r requirements.txt
+FROM alpine:edge
+RUN apk add --update-cache xclip
+ENTRYPOINT xclip
 
 EXPOSE 8000
 
