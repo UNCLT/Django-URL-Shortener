@@ -111,8 +111,6 @@ def create_utm(request):
                 utm_url_dict['utm_term'] = utm_term
 
             utm_url = homepage + '/?' + urllib.parse.urlencode(utm_url_dict)
-            pyperclip.copy(utm_url)
-            messages.success(request, 'UTM link created and copied to clipboard!')
 
             context = {'form': form, 'utm_url': utm_url}
 
