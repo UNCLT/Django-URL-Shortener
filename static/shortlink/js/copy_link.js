@@ -15,5 +15,13 @@ $('document').ready(function () {
         previous = btn
     }))
 
+
+    const copyBtnUTM = document.getElementById('copy-btn-utm')
+
+    copyBtnUTM.addEventListener('click', () => {
+        const UTMlinkToCopy = copyBtnUTM.getAttribute('data-utm')
+        navigator.clipboard.writeText(UTMlinkToCopy)
+        copyBtnUTM.textContent = 'Copied!'
+    })
 });
 
