@@ -9,7 +9,7 @@ urlpatterns = [
     path('<int:link_id>/to_the_top', views.to_the_top, name='to_the_top'),
     path('<int:link_id>/delete_link', views.delete_link, name='delete_link'),
     path('<int:pk>/edit_link', EditLinkView.as_view(), name='edit_link'),
-    path('<int:link_id>/copy_link', views.copy_link, name='copy_link'),
+    # path('<int:link_id>/copy_link', views.copy_link, name='copy_link'),
     path('manage_domains/', views.manage_domains, name='manage_domains'),
     path('<int:domain_id>/delete_domain', views.delete_domain, name='delete_domain'),
     path('create_utm/', views.create_utm, name='create_utm'),
@@ -20,7 +20,6 @@ urlpatterns = [
     path('privacy_policy', views.privacy_policy, name='privacy_policy'),
 
     path('<str:link_slug1>', views.link_redirect, name='link_redirect'),
-    path('.well-known/pki-validation/3B25A22C9BB775C38B53167C578B23C8.txt', views.read_file, name='read_file'),
     path('<str:link_slug1>/<str:link_slug2>/', views.link_redirect, name='link_redirect'),
 
 ]

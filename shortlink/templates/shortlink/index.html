@@ -50,7 +50,8 @@
                     </td>
 
                     <td valign="top" align="center">
-                        <a href="{% url 'shortlink:edit_link' link.pk %}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                        <a href="{% url 'shortlink:edit_link' link.pk %}"
+                           class="btn btn-outline-secondary btn-sm">Edit</a>
                     </td>
 
                     <td align="center">
@@ -62,16 +63,13 @@
                     </td>
 
                     <td align="center">
-                        <a class="shortlink" , href="{{ link.source_link }}">http://ya.link/{{ link.slug }}</a>
+                        <a class="shortlink" , href="{{ link.source_link }}">https://ya.link/{{ link.slug }}</a>
                     </td>
 
                     <td valign="top" align="center">
-                        <form action="{% url 'shortlink:copy_link' link.id %}" method="post">
-                            {% csrf_token %}
-                            <button class="btn btn-outline-secondary btn-sm" type="submit">
-                                Copy
-                            </button>
-                        </form>
+                        <button class="btn btn-outline-secondary btn-sm copy-btn" data-link="{{ link.slug }}">
+                            Copy
+                        </button>
                     </td>
 
                     <td valign="top" align="center">

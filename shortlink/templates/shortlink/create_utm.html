@@ -51,7 +51,8 @@
 
                 </td>
                 <td>
-                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button" aria-pressed="true">back to URLs</a>
+                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
+                       aria-pressed="true">back to URLs</a>
                 </td>
             </tr>
         </table>
@@ -61,10 +62,15 @@
 
 
     {% if utm_url %}
-        <div class="container">
+        <div>
             <textarea class="form-control" cols="80" rows="5">{{ utm_url }}</textarea>
         </div>
         <br>
+        <div>
+            <button class="btn btn-outline-secondary btn-sm copy-btn" data-link="{{ utm_url }}">
+                Copy
+            </button>
+        </div>
 
 
     {% else %}

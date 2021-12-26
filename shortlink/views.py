@@ -166,15 +166,6 @@ class EditLinkView(UpdateView):
     template_name_suffix = '_update_form'
 
 
-@login_required
-def copy_link(request, link_id):
-    if request.method == 'POST':
-        link_to_copy = Link.objects.get(id=link_id)
-        pyperclip.copy('http://ya.link/' + link_to_copy.slug)
-        messages.success(request, 'Short link copied to clipboard!')
-    return redirect(reverse('shortlink:index'))
-
-
 def link_redirect(request, link_slug1, link_slug2=None):
     if request.method == 'GET':
         requested_url = link_slug1 if not link_slug2 else link_slug1 + '/' + link_slug2
@@ -221,10 +212,3 @@ def terms_of_use(request):
 
 def privacy_policy(request):
     return render(request, 'shortlink/privacy_policy.html')
-
-
-def read_file(request):
-    f = open('.well-known/pki-validation/3B25A22C9BB775C38B53167C578B23C8.txt', 'r')
-    file_content = f.read()
-    f.close()
-    return HttpResponse(file_content, content_type="text/plain")

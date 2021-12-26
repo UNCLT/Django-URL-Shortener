@@ -1,0 +1,139 @@
+body {
+    background: #FFFFFF;
+}
+
+a.sourcelink {
+    color: #212529;
+    max-width: 300px; /* Ширина поля */
+    width: 300px;
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    background: #e0dcdc; /* Цвет фона */
+    padding: 5px; /* Поля вокруг текста */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    display: inline-block;
+}
+
+a.sourcelink:hover {
+    color: #5a636b;
+    text-decoration: none;
+}
+
+a.shortlink {
+    color: #212529;
+    max-width: 200px;
+    width: 200px; /* Ширина поля */
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    background: #b8adad; /* Цвет фона */
+    padding: 5px; /* Поля вокруг текста */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    display: inline-block;
+}
+
+a.shortlink:hover {
+    color: #5a636b;
+    text-decoration: none;
+}
+
+text.title {
+    max-width: 200px;
+    width: 200px; /* Ширина поля */
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    background: #FFFFFF; /* Цвет фона */
+    padding: 5px; /* Поля вокруг текста */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+a.log {
+    color: #dc3545;
+    list-style-type: none;
+    list-style: none;
+    align: right
+    position: right;
+    padding: 20px;
+
+}
+
+a.log:hover {
+    color: #b51423;
+    text-decoration: underline;
+}
+
+a.link {
+    color: #212529;
+}
+
+.modal-body p {
+    word-wrap: break-word;
+}
+
+text.domain {
+    max-width: 200px;
+    width: 200px; /* Ширина поля */
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    background: #f2eded; /* Цвет фона */
+    padding: 5px; /* Поля вокруг текста */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    display: inline-block;
+}
+
+text.username {
+    color: #FFFFFF;
+}
+
+.navbar-dark .navbar-text {
+    color: #FFFFFF;
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+    padding-left: 5%;
+    /*border-collapse: collapse;*/
+    /*border: none;*/
+    /*max-width: 100%;*/
+    /*margin: 1rem auto;*/
+    display: block;
+    /*align-items: center;*/
+    justify-content: space-around;
+    /*font-size: 2rem;*/
+}
+
+.with-border {
+    border-color: black;
+    border-style: solid;
+    border-width: 10px;
+}
+
+.with-linear-gradient {
+    border-style: solid;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-width: 5px;
+    border-image: linear-gradient(#FFC107, #DC3545, #FFC107) 1;
+}
+
+.with-conic-gradient {
+    border-style: solid;
+    border-top: 5px;
+    border-bottom: 5px;
+    border-right: 5px;
+    border-width: 5px;
+    border-image: conic-gradient(#DC3545, #FFC107) 1;
+}
+
+.navbar img {
+    height: 40px;
+    margin: 1px;
+}
+
+img.google {
+    height: 25px;
+}
+
