@@ -11,7 +11,6 @@
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     <link rel="stylesheet" href="{% static 'shortlink/css/shortlink.css' %}">
-        <meta name="yandex-verification" content="71dd7ace062fdb4c" />
     <link rel="shortcut icon" href="{% static 'shortlink/img/favicon.png' %}" type="image/png">
 
     <script src={% static 'shortlink/js/copy_link.js' %}></script>
@@ -33,7 +32,7 @@
         {% include 'shortlink/messages.html' %}
         {% block content %}{% endblock content %}
     </div>
-
+    <div class="clear" style="height: 40px;"></div>
     <div>
         {% include 'shortlink/footer.html' %}
     </div>

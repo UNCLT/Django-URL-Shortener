@@ -99,6 +99,8 @@ def create_utm(request):
             utm_content = form.cleaned_data['utm_content']
             utm_term = form.cleaned_data['utm_term']
 
+            homepage = homepage[:-1] if homepage[-1] == '/' else homepage
+
             utm_url_dict = {'utm_source': utm_source,
                             'utm_medium': utm_medium,
                             'utm_campaign': utm_campaign
