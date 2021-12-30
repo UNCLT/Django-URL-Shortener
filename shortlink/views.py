@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 
-import pyperclip
+import string
 import urllib
 
 from django.core.mail import send_mail
@@ -99,7 +99,11 @@ def create_utm(request):
             utm_content = form.cleaned_data['utm_content']
             utm_term = form.cleaned_data['utm_term']
 
-            homepage = homepage[:-1] if homepage[-1] == '/' else homepage
+            while True:
+                if not homepage[-1] in string.ascii_letters:
+                    homepage = homepage[:-1]
+                else:
+                    break
 
             utm_url_dict = {'utm_source': utm_source,
                             'utm_medium': utm_medium,
