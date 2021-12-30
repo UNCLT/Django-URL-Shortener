@@ -12,14 +12,26 @@
     <table>
         <tr>
             <td>
-                {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.
+                {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>&nbsp;or
 
                 {% endblocktrans %}
             </td>
-{#            <td>#}
-{#                    or log in with&nbsp#}
-{#                {% include "socialaccount/snippets/provider_list.html" with process="login" %}#}
-{#            </td>#}
+        </tr>
+        <tr>
+            <td>
+                <br>
+                <div class="row">
+                    <div class="col-md-9">
+                        <a class="btn btn-outline-dark" href="/accounts/google/login/" role="button"
+                           style="text-transform:none">
+                            <img width="20px" style="margin-bottom:3px; margin-right:5px"
+                                 alt="Google sign-in"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>
+                            Login with Google
+                        </a>
+                    </div>
+                </div>
+            </td>
         </tr>
     </table>
 
@@ -32,14 +44,14 @@
                 {{ form|crispy }}
             </div>
         </div>
-{#        <div>#}
-{#            <p>#}
-{#                By pressing <b>Sign Up</b> button you agree with#}
-{#                <a href="{% url 'shortlink:terms_of_use' %}">Terms of Use</a>#}
-{#                and#}
-{#                <a href="{% url 'shortlink:privacy_policy' %}">Privacy Policy</a>.#}
-{#            </p>#}
-{#        </div>#}
+        {#        <div>#}
+        {#            <p>#}
+        {#                By pressing <b>Sign Up</b> button you agree with#}
+        {#                <a href="{% url 'shortlink:terms_of_use' %}">Terms of Use</a>#}
+        {#                and#}
+        {#                <a href="{% url 'shortlink:privacy_policy' %}">Privacy Policy</a>.#}
+        {#            </p>#}
+        {#        </div>#}
 
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
