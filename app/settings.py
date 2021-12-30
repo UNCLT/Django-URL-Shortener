@@ -25,6 +25,8 @@ EMAIL_PORT = os.getenv("EMAIL_PORT")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
