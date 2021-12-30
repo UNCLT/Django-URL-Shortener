@@ -100,7 +100,7 @@ def create_utm(request):
             utm_term = form.cleaned_data['utm_term']
 
             while True:
-                if not homepage[-1] in string.ascii_letters:
+                if not homepage[-1] in string.ascii_letters + string.digits:
                     homepage = homepage[:-1]
                 else:
                     break
