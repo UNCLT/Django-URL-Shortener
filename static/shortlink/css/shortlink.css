@@ -111,8 +111,9 @@ text.username {
 }
 
 .with-linear-gradient {
+    width: 100%;
     border-style: solid;
-    border-top: none;
+    border-left: none;
     border-bottom: none;
     border-right: none;
     border-width: 5px;

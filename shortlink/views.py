@@ -6,11 +6,11 @@ from django.urls import reverse
 
 from django.views.generic.edit import UpdateView
 
-from .models import Link, Domain
+from .models import Link, Domain, SecureLink
 
-from .forms import LinkForm, DomainForm, UTMForm, ContactForm
+from .forms import LinkForm, DomainForm, UTMForm, ContactForm, SecureLinkForm
 
-from .slug import Slug
+from .slug import Slug, SecureSlug
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -34,18 +34,16 @@ def index(request):
             user_slug = form.cleaned_data['slug']
             domain = form.cleaned_data['domain']
 
-            slug = user_slug if user_slug else Slug.slug()
-            slug = str(domain) + '/' + str(slug) if domain else slug
-
             while True:
 
-                if not Link.objects.filter(slug=slug).exists():
+                slug = user_slug if user_slug else Slug.slug()
+                slug = str(domain) + '/' + str(slug) if domain else slug
 
+                if not Link.objects.filter(slug=slug).exists():
                     try:
                         link = Link(user=user, title=title, source_link=source_link, slug=slug)
                         link.save()
                         break
-
                     except IntegrityError:
                         pass
                 else:
@@ -54,11 +52,62 @@ def index(request):
 
             return HttpResponseRedirect(reverse('shortlink:index', args=None))
     else:
-       form = LinkForm(request.user)
+        form = LinkForm(request.user)
     my_links_list = Link.objects.filter(user=request.user).order_by('-date_modified')
     context = {'form': form, 'my_links_list': my_links_list}
 
     return render(request, 'shortlink/index.html', context)
+
+
+@login_required
+def create_secure_link(request):
+    if request.method == 'POST':
+        form = SecureLinkForm(request.user, request.POST)
+        if form.is_valid():
+            user = request.user
+            data = form.cleaned_data['data']
+            openings_number = form.cleaned_data['openings_number']
+
+            while True:
+                slug = SecureSlug.secure_slug()
+
+                if not SecureLink.objects.filter(slug=slug).exists():
+                    try:
+                        secure_link = SecureLink(user=user, data=data, openings_number=openings_number, slug=slug)
+                        secure_link.save()
+                        break
+                    except IntegrityError:
+                        pass
+                else:
+                    break
+
+            return HttpResponseRedirect(reverse('shortlink:create_secure_link', args=None))
+    else:
+        form = SecureLinkForm(request.user)
+    my_secure_links_list = SecureLink.objects.filter(user=request.user).order_by('-date_created')
+    context = {'form': form, 'my_secure_links_list': my_secure_links_list}
+
+    return render(request, 'shortlink/create_secure_link.html', context)
+
+
+def open_secure_link(request, secure_slug):
+    if request.method == 'GET':
+        if SecureLink.objects.filter(slug=secure_slug).exists():
+            secure_link = SecureLink.objects.get(slug=secure_slug)
+            open_counter = secure_link.open_counter + 1
+            if open_counter < secure_link.openings_number:
+                data = SecureLink.objects.get(slug=secure_slug).data
+                context = {'data': data}
+                secure_link.open_counter = open_counter
+                secure_link.save()
+            elif open_counter == secure_link.openings_number:
+                data = SecureLink.objects.get(slug=secure_slug).data
+                context = {'data': data}
+                secure_link.delete()
+
+            return render(request, 'shortlink/open_secure_link.html', context)
+        else:
+            raise Http404('Link does not exist.')
 
 
 @login_required
@@ -80,7 +129,7 @@ def manage_domains(request):
 
             return HttpResponseRedirect(reverse('shortlink:manage_domains', args=None))
     else:
-       form = DomainForm()
+        form = DomainForm()
     my_domains_list = Domain.objects.filter(user=request.user).order_by('date_created')
     context = {'form': form, 'my_domains_list': my_domains_list}
 

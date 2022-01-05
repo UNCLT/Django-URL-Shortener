@@ -1,0 +1,9 @@
+{% extends "shortlink/base.html" %}
+
+{% block content %}
+    {% if data %}
+        <div>
+            <textarea class="form-control" cols="80" rows="5">{{ data }}</textarea>
+        </div>
+    {% endif %}
+{% endblock content %}

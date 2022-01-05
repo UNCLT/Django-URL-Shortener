@@ -1,0 +1,68 @@
+{% extends "shortlink/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form action="{% url 'shortlink:create_secure_link' %}" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-8">
+                {{ form.data|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                {{ form.openings_number|as_crispy_field }}
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    <button class="btn btn-warning" type="submit">
+                        create secure link
+                    </button>
+                </td>
+                <td>
+                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
+                       aria-pressed="true">back to URLs</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br>
+
+    {% if my_secure_links_list %}
+        <p><b>NOTE.</b> Secure links disappear after reaching target opening number.</p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Link</th>
+                <th scope="col">Copy link</th>
+                <th scope="col">Openings number</th>
+                <th scope="col">Openings count</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for secure_link in my_secure_links_list %}
+                <tr>
+                    <td>https://ya.link/{{ secure_link.slug }}</td>
+                    <td>
+                        <button class="btn btn-outline-secondary btn-sm copy-btn" data-link="{{ secure_link.slug }}">
+                            Copy
+                        </button>
+                    </td>
+                    <td>{{ secure_link.openings_number }}</td>
+                    <td>{{ secure_link.open_counter }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    {% else %}
+        Your secure links will appear here until they are expired. Create one!
+    {% endif %}
+{% endblock content %}

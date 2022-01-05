@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Link, Domain
+from .models import Link, Domain, SecureLink
 
 
 class LinkForm(forms.ModelForm):
@@ -39,3 +39,15 @@ class ContactForm(forms.Form):
     email = forms.EmailField(label='Email', max_length=50, required=True)
     subject = forms.CharField(label='Subject', max_length=100, required=False)
     message_text = forms.CharField(widget=forms.Textarea, label='Your message', max_length=3000, required=True)
+
+
+class SecureLinkForm(forms.ModelForm):
+    data = forms.CharField(widget=forms.Textarea, label='Text to secure', required=True)
+    openings_number = forms.IntegerField(label='How many times link could be open', required=True)
+
+    class Meta:
+        model = SecureLink
+        fields = ['data', 'openings_number']
+
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)

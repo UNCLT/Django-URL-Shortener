@@ -4,18 +4,23 @@
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shortlink:manage_domains' %}">Manage domains</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shortlink:create_utm' %}">Create UTM link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shortlink:about_the_project' %}">About the project</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shortlink:contact_us' %}">Contact us</a>
-                </li>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'shortlink:index' %}">Home</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'shortlink:manage_domains' %}">Manage domains</a>
+                        <a class="dropdown-item" href="{% url 'shortlink:create_utm' %}">Create UTM link</a>
+                        <a class="dropdown-item" href="{% url 'shortlink:create_secure_link' %}">Create secure link</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'shortlink:about_the_project' %}">About the project</a>
+                        <a class="dropdown-item" href="{% url 'shortlink:contact_us' %}">Contact us</a>
+
+                    </div>
+                </div>
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'shortlink:about_the_project' %}">About the project</a>

@@ -10,12 +10,49 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+    <div class="clear" style="height: 40px;"></div>
+    <table style="width: 100%;">
+        <tr>
+            <td align="center">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'shortlink/img/card1.png' %}"
+                         alt="Card image cap"/>
+                    <div class="card-body">
+                        <p class="card-text">Free permanent short URLs. Need customization? Add custom domains
+                            for your links!</p>
+                    </div>
+                </div>
+            </td>
 
+            <td align="center">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'shortlink/img/card2.png' %}"
+                         alt="Card image cap"/>
+                    <div class="card-body">
+                        <p class="card-text">Built in UTM link generator. Launch campaign and
+                            immediately
+                            shorten the result link.</p>
+                    </div>
+                </div>
+            </td>
+
+            <td align="center">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'shortlink/img/card3.png' %}"
+                         alt="Card image cap"/>
+                    <div class="card-body">
+                        <p class="card-text">Limited lifetime links. Send links with your sensitive data
+                        with guarantee deletion from server.</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
     <br>
-    <div>
-        <table width="100%">
-            <tr>
-                <td style="padding-left: 10%;">
+    <table style="width: 100%">
+        <tr style="width: 100%";>
+            <td class="box with-linear-gradient">
+                <div class="container" style="width: 400px;">
                     <br>
                     <h1>{% trans "Sign In" %}</h1>
 
@@ -59,7 +96,7 @@
                     <form class="login" method="POST" action="{% url 'account_login' %}">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-8">
                                 {{ form|crispy }}
                             </div>
                         </div>
@@ -85,40 +122,13 @@
                         </table>
                     </form>
                     <br>
-                    <p>{% blocktrans %}Don't have an account? Please <a href="{{ signup_url }}">sign up</a>
-                        .{% endblocktrans %}</p>
-                </td>
-                <td class="box with-linear-gradient">
-                    <table>
-                        <tr>
-
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="{% static 'shortlink/img/card1.png' %}"
-                                     alt="Card image cap"/>
-                                <div class="card-body">
-                                    <p class="card-text">Free permanent short URLs with ability to add unlimited
-                                        domains.</p>
-                                </div>
-                            </div>
-                        </tr>
-                        <tr>
-                            <br>
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="{% static 'shortlink/img/card2.png' %}"
-                                     alt="Card image cap"/>
-                                <div class="card-body">
-                                    <p class="card-text">Built in UTM link generator. Launch campaign and
-                                        immediately
-                                        shorten the result link.</p>
-                                </div>
-                            </div>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    </form>
-
+                    <p>
+                        {% blocktrans %}
+                            Don't have an account? Please <a href="{{ signup_url }}">sign up</a>.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            </td>
+        </tr>
+    </table>
 {% endblock %}
