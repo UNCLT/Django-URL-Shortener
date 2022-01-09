@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 from .models import Link, Domain
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
 
 
 class LinkAdmin(admin.ModelAdmin):
@@ -11,6 +13,15 @@ class LinkAdmin(admin.ModelAdmin):
 class DomainAdmin(admin.ModelAdmin):
     list_display = ['user', 'domain_name', 'date_created']
     ordering = ['-date_created']
+
+
+admin.site.unregister(User)
+
+
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff', 'date_joined']
+    ordering = ['-date_joined']
 
 
 admin.site.register(Link, LinkAdmin)
