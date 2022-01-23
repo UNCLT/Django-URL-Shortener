@@ -39,7 +39,7 @@ class SecureLink(models.Model):
     data = models.TextField('Text to secure', blank=False)
     openings_number = models.PositiveIntegerField('Openings number')
     open_counter = models.PositiveIntegerField('Counter of openings', default=0)
-    slug = models.CharField('Slug', max_length=20, blank=False)
+    slug = models.CharField('Slug', max_length=30, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

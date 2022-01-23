@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Link, Domain
+from .models import Link, Domain, SecureLink
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 
@@ -8,6 +8,11 @@ from django.contrib.auth.admin import UserAdmin
 class LinkAdmin(admin.ModelAdmin):
     list_display = ['user', 'source_link', 'slug', 'date_created', 'date_modified']
     ordering = ['-date_modified']
+
+
+class SecureLinkAdmin(admin.ModelAdmin):
+    list_display = ['user', 'openings_number', 'open_counter', 'date_created']
+    ordering = ['-date_created']
 
 
 class DomainAdmin(admin.ModelAdmin):
@@ -25,4 +30,5 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(Link, LinkAdmin)
+admin.site.register(SecureLink, SecureLinkAdmin)
 admin.site.register(Domain, DomainAdmin)

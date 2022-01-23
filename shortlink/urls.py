@@ -14,7 +14,6 @@ urlpatterns = [
     path('about_the_project/', views.about_the_project, name='about_the_project'),
     path('contact_us/', views.contact_us, name='contact_us'),
 
-    path('<str:secure_slug>', views.open_secure_link, name='open_secure_link'),
     path('create_secure_link/', views.create_secure_link, name='create_secure_link'),
 
     path('<str:link_slug1>', views.link_redirect, name='link_redirect'),

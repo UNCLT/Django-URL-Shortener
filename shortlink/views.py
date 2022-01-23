@@ -90,26 +90,6 @@ def create_secure_link(request):
     return render(request, 'shortlink/create_secure_link.html', context)
 
 
-def open_secure_link(request, secure_slug):
-    if request.method == 'GET':
-        if SecureLink.objects.filter(slug=secure_slug).exists():
-            secure_link = SecureLink.objects.get(slug=secure_slug)
-            open_counter = secure_link.open_counter + 1
-            if open_counter < secure_link.openings_number:
-                data = SecureLink.objects.get(slug=secure_slug).data
-                context = {'data': data}
-                secure_link.open_counter = open_counter
-                secure_link.save()
-            elif open_counter == secure_link.openings_number:
-                data = SecureLink.objects.get(slug=secure_slug).data
-                context = {'data': data}
-                secure_link.delete()
-
-            return render(request, 'shortlink/open_secure_link.html', context)
-        else:
-            raise Http404('Link does not exist.')
-
-
 @login_required
 def manage_domains(request):
     if request.method == 'POST':
@@ -225,6 +205,20 @@ def link_redirect(request, link_slug1, link_slug2=None):
         if Link.objects.filter(slug=requested_url).exists():
             link_to_redirect = Link.objects.get(slug=requested_url)
             return HttpResponseRedirect(str(link_to_redirect))
+        elif SecureLink.objects.filter(slug=requested_url).exists():
+            secure_link = SecureLink.objects.get(slug=requested_url)
+            open_counter = secure_link.open_counter + 1
+            if open_counter < secure_link.openings_number:
+                data = SecureLink.objects.get(slug=requested_url).data
+                context = {'data': data}
+                secure_link.open_counter = open_counter
+                secure_link.save()
+            elif open_counter == secure_link.openings_number:
+                data = SecureLink.objects.get(slug=requested_url).data
+                context = {'data': data}
+                secure_link.delete()
+
+            return render(request, 'shortlink/open_secure_link.html', context)
         else:
             raise Http404('Link does not exists.')
 
