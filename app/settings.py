@@ -26,6 +26,7 @@ EMAIL_PORT = os.getenv("EMAIL_PORT")
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 
 from pathlib import Path
 
