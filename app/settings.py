@@ -43,6 +43,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['https://www.ya.link', 'https://ya.link']
 
 # Application definition
 
