@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import HttpResponseRedirect, Http404, HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 
 from django.views.generic.edit import UpdateView
@@ -21,6 +21,8 @@ import urllib
 
 from django.core.mail import send_mail
 from django.conf import settings
+
+from .messengers import messengers_list
 
 
 @login_required
@@ -201,6 +203,11 @@ class EditLinkView(UpdateView):
 
 def link_redirect(request, link_slug1, link_slug2=None):
     if request.method == 'GET':
+
+        for messenger in messengers_list:
+            if messenger in request.META['HTTP_USER_AGENT']:
+                return HttpResponseNotFound("hello")
+
         requested_url = link_slug1 if not link_slug2 else link_slug1 + '/' + link_slug2
         if Link.objects.filter(slug=requested_url).exists():
             link_to_redirect = Link.objects.get(slug=requested_url)
