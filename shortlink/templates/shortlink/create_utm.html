@@ -4,84 +4,142 @@
 
 {% block content %}
     <main class="container">
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-                <h4>Create UTM link for your campaign</h4>
-                <br>
-                <br>
-
-                <form action="{% url 'shortlink:create_utm' %}" method="post">
-                    {% csrf_token %}
-
-                    <div class="row">
-                        <div class="col-4">
-                            {{ form.homepage|as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            {{ form.utm_source|as_crispy_field }}
-                        </div>
-                        <div class="col-4">
-                            {{ form.utm_content|as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            {{ form.utm_medium|as_crispy_field }}
-                        </div>
-                        <div class="col-4">
-                            {{ form.utm_term|as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            {{ form.utm_campaign|as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <table>
-                        <tr>
-                            <td>
-
-                                <button class="btn btn-warning" type="submit">
-                                    create UTM link
-                                </button>
-
-                            </td>
-                            <td>
-                                <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
-                                   aria-pressed="true">back to URLs</a>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                <br>
-                <br>
-
-
-                {% if utm_url %}
-                    <div>
-                        <textarea class="form-control" cols="80" rows="5">{{ utm_url }}</textarea>
-                    </div>
+        {% if request.user_agent.is_pc %}
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
                     <br>
-                    <div>
-                        <button class="btn btn-outline-secondary btn-sm" id="copy-btn-utm" data-utm="{{ utm_url }}">
-                            Copy
-                        </button>
-                    </div>
+                    <h4>Create UTM link for your campaign</h4>
+                    <br>
+                    <br>
+
+                    <form action="{% url 'shortlink:create_utm' %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-4">
+                                {{ form.homepage|as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                {{ form.utm_source|as_crispy_field }}
+                            </div>
+                            <div class="col-4">
+                                {{ form.utm_content|as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                {{ form.utm_medium|as_crispy_field }}
+                            </div>
+                            <div class="col-4">
+                                {{ form.utm_term|as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                {{ form.utm_campaign|as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td>
+
+                                    <button class="btn btn-warning" type="submit">
+                                        create UTM link
+                                    </button>
+
+                                </td>
+                                <td>
+                                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
+                                       aria-pressed="true">back to URLs</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br>
+                    <br>
 
 
-                {% else %}
-                    <center>Your UTM link will appear here. Create one!</center>
-                {% endif %}
+                    {% if utm_url %}
+                        <div>
+                            <textarea class="form-control" cols="80" rows="5">{{ utm_url }}</textarea>
+                        </div>
+                        <br>
+                        <div>
+                            <button class="btn btn-outline-secondary btn-sm" id="copy-btn-utm" data-utm="{{ utm_url }}">
+                                Copy
+                            </button>
+                        </div>
+
+
+                    {% else %}
+                        <center>Your UTM link will appear here. Create one!</center>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-    </main>
+        {% else %}
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <br>
+                    <h4>Create UTM link for your campaign</h4>
+                    <br>
+                    <br>
 
+                    <form action="{% url 'shortlink:create_utm' %}" method="post">
+                        {% csrf_token %}
+
+                        {{ form.homepage|as_crispy_field }}
+                        {{ form.utm_source|as_crispy_field }}
+                        {{ form.utm_medium|as_crispy_field }}
+                        {{ form.utm_campaign|as_crispy_field }}
+                        {{ form.utm_content|as_crispy_field }}
+                        {{ form.utm_term|as_crispy_field }}
+
+                        <table>
+                            <tr>
+                                <td>
+
+                                    <button class="btn btn-warning" type="submit">
+                                        create UTM link
+                                    </button>
+
+                                </td>
+                                <td>
+                                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
+                                       aria-pressed="true">back to URLs</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br>
+                    <br>
+
+
+                    {% if utm_url %}
+                        <div>
+                            <textarea class="form-control" cols="80" rows="5">{{ utm_url }}</textarea>
+                        </div>
+                        <br>
+                        <div>
+                            <button class="btn btn-outline-secondary btn-sm" id="copy-btn-utm" data-utm="{{ utm_url }}">
+                                Copy
+                            </button>
+                        </div>
+
+
+                    {% else %}
+                        <center>Your UTM link will appear here. Create one!</center>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </main>
 
 {% endblock content %}
