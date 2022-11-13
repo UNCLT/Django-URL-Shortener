@@ -9,8 +9,6 @@
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
-
-
 {% block content %}
     {% if not request.user_agent.is_mobile %}
         <main role="main" class="container">
@@ -43,7 +41,7 @@
                 <div class="col-2"></div>
                 <div class="col-8">
                     <br>
-                    <h1>{% trans "Sign In" %}</h1>
+                    <h4>{% trans "Sign In" %}</h4>
 
                     {% get_providers as socialaccount_providers %}
 
@@ -170,7 +168,7 @@
                 <div class="col-0"></div>
                 <div class="col-12">
                     <br>
-                    <h1>{% trans "Sign In" %}</h1>
+                    <h4>{% trans "Sign In" %}</h4>
 
                     {% get_providers as socialaccount_providers %}
 

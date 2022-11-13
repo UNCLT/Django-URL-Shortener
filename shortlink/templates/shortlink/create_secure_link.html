@@ -5,127 +5,65 @@
 {% block content %}
     <main role="main" class="container">
         <div class="row">
-{#            {% if request.user_agent.is_pc %}#}
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <br>
-                    <h4>Create secure link</h4>
-                    <br>
-                    <form action="{% url 'shortlink:create_secure_link' %}" method="post">
-                        {% csrf_token %}
-                        {{ form.data|as_crispy_field }}
-                        {{ form.openings_number|as_crispy_field }}
-                        <table>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <br>
+                <h4>Create secure link</h4>
+                <br>
+                <form action="{% url 'shortlink:create_secure_link' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.data|as_crispy_field }}
+                    {{ form.openings_number|as_crispy_field }}
+                    <table>
+                        <tr>
+                            <td>
+                                <button class="btn btn-warning" type="submit">
+                                    create secure link
+                                </button>
+                            </td>
+                            <td>
+                                <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
+                                   aria-pressed="true">back to URLs</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <br>
+
+                {% if my_secure_links_list %}
+                    <p><b>NOTE.</b> Secure links disappear after reaching target opening number.</p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <td>
-                                    <button class="btn btn-warning" type="submit">
-                                        create secure link
-                                    </button>
-                                </td>
-                                <td>
-                                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
-                                       aria-pressed="true">back to URLs</a>
-                                </td>
+                                <th scope="col">Link</th>
+                                <th scope="col">Copy link</th>
+                                <th scope="col">Openings number</th>
+                                <th scope="col">Openings count</th>
                             </tr>
-                        </table>
-                    </form>
-                    <br>
+                            </thead>
 
-                    {% if my_secure_links_list %}
-                        <p><b>NOTE.</b> Secure links disappear after reaching target opening number.</p>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
+                            <tbody>
+                            {% for secure_link in my_secure_links_list %}
                                 <tr>
-                                    <th scope="col">Link</th>
-                                    <th scope="col">Copy link</th>
-                                    <th scope="col">Openings number</th>
-                                    <th scope="col">Openings count</th>
+                                    <td>https://ya.link/{{ secure_link.slug }}</td>
+                                    <td>
+                                        <button class="btn btn-outline-secondary btn-sm copy-btn" data-link="{{ secure_link.slug }}">
+                                            Copy
+                                        </button>
+                                    </td>
+                                    <td>{{ secure_link.openings_number }}</td>
+                                    <td>{{ secure_link.open_counter }}</td>
                                 </tr>
-                                </thead>
-
-                                <tbody>
-                                {% for secure_link in my_secure_links_list %}
-                                    <tr>
-                                        <td>https://ya.link/{{ secure_link.slug }}</td>
-                                        <td>
-                                            <button class="btn btn-outline-secondary btn-sm copy-btn" data-link="{{ secure_link.slug }}">
-                                                Copy
-                                            </button>
-                                        </td>
-                                        <td>{{ secure_link.openings_number }}</td>
-                                        <td>{{ secure_link.open_counter }}</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    {% else %}
-                        Your secure links will appear here until they are expired. Create one!
-                    {% endif %}
-                </div>
-                <div class="col-sm-2"></div>
-{#            {% else %}#}
-{#                <div class="col-sm-0"></div>#}
-{#                <div class="col-sm-12">#}
-{#                    <br>#}
-{#                    <h4>Create secure link</h4>#}
-{#                    <br>#}
-{#                    <form action="{% url 'shortlink:create_secure_link' %}" method="post">#}
-{#                        {% csrf_token %}#}
-{#                        {{ form.data|as_crispy_field }}#}
-{#                        {{ form.openings_number|as_crispy_field }}#}
-{#                        <table>#}
-{#                            <tr>#}
-{#                                <td>#}
-{#                                    <button class="btn btn-warning" type="submit">#}
-{#                                        create secure link#}
-{#                                    </button>#}
-{#                                </td>#}
-{#                                <td>#}
-{#                                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"#}
-{#                                       aria-pressed="true">back to URLs</a>#}
-{#                                </td>#}
-{#                            </tr>#}
-{#                        </table>#}
-{#                    </form>#}
-{#                    <br>#}
-{##}
-{#                    {% if my_secure_links_list %}#}
-{#                        <p><b>NOTE.</b> Secure links disappear after reaching target opening number.</p>#}
-{#                        <div class="table-responsive">#}
-{#                            <table class="table">#}
-{#                                <thead>#}
-{#                                <tr>#}
-{#                                    <th scope="col">Link</th>#}
-{#                                    <th scope="col">Copy link</th>#}
-{#                                    <th scope="col">Openings number</th>#}
-{#                                    <th scope="col">Openings count</th>#}
-{#                                </tr>#}
-{#                                </thead>#}
-{##}
-{#                                <tbody>#}
-{#                                {% for secure_link in my_secure_links_list %}#}
-{#                                    <tr>#}
-{#                                        <td>https://ya.link/{{ secure_link.slug }}</td>#}
-{#                                        <td>#}
-{#                                            <button class="btn btn-outline-secondary btn-sm copy-btn" data-link="{{ secure_link.slug }}">#}
-{#                                                Copy#}
-{#                                            </button>#}
-{#                                        </td>#}
-{#                                        <td>{{ secure_link.openings_number }}</td>#}
-{#                                        <td>{{ secure_link.open_counter }}</td>#}
-{#                                    </tr>#}
-{#                                {% endfor %}#}
-{#                                </tbody>#}
-{#                            </table>#}
-{#                        </div>#}
-{#                    {% else %}#}
-{#                        Your secure links will appear here until they are expired. Create one!#}
-{#                    {% endif %}#}
-{#                </div>#}
-{#                <div class="col-sm-0"></div>#}
-{#            {% endif %}#}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    Your secure links will appear here until they are expired. Create one!
+                {% endif %}
+            </div>
+            <div class="col-sm-2"></div>
         </div>
     </main>
 {% endblock content %}
