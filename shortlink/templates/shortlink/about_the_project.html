@@ -3,25 +3,32 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-    <h1>What is our project about?</h1>
     <br>
-    <br>
-    <h5>Just a pet project</h5>
-    <p>First of all YA.LINK have been started as a pet project for training Python/Django skills.</p>
-    <p>So if you read this, the project succeed.</p>
-    <br>
-    <h5>Unlimited links and domains</h5>
-    <p>From the very beginning of YA.LINK it was planned as a free open source project. In case of URL-shortener it'll always mean</p>
-    <p>a possibility for a user to own unlimited permanent links and domains for free.</p>
-    <br>
-    <h5>UTM generator</h5>
-    <p>YA.LINK provide a UTM-link generator as a useful additional feature. Now you can generate, shorten and</p>
-    <p>manage UTM-links for your campaign in one place.</p>
-    <br>
-    <h5>Secure links</h5>
-    <p>This service enables registered users to transfer their sensitive data without the risk of compromising it.</p>
-    <p>This is achieved through links that have a limited lifetime. Upon reaching the limit value of the counter,</p>
-    <p>this link and all the data to which it led are completely deleted from the server.</p>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <h4>What is our project about?</h4>
+                <br>
+                <h5>Just a pet project</h5>
+                <p>First of all YA.LINK have been started as a pet project for training Python/Django skills.</p>
+                <p>So if you read this, the project succeed.</p>
+                <br>
+                <h5>Unlimited links and domains</h5>
+                <p>From the very beginning of YA.LINK it was planned as a free open source project. In case of URL-shortener it'll always mean</p>
+                <p>a possibility for a user to own unlimited permanent links and domains for free.</p>
+                <br>
+                <h5>UTM generator</h5>
+                <p>YA.LINK provide a UTM-link generator as a useful additional feature. Now you can generate, shorten and</p>
+                <p>manage UTM-links for your campaign in one place.</p>
+                <br>
+                <h5>Secure links</h5>
+                <p>This service enables registered users to transfer their sensitive data without the risk of compromising it.</p>
+                <p>This is achieved through links that have a limited lifetime. Upon reaching the limit value of the counter,</p>
+                <p>this link and all the data to which it led are completely deleted from the server.</p>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </main>
 
 {% endblock content %}

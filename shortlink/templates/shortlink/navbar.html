@@ -1,42 +1,217 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <ul class="navbar-nav mr-auto">
-            {% if user.is_authenticated %}
-                <div class="btn-group">
-                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Menu
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'shortlink:index' %}">Home</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'shortlink:manage_domains' %}">Manage domains</a>
-                        <a class="dropdown-item" href="{% url 'shortlink:create_utm' %}">Create UTM link</a>
-                        <a class="dropdown-item" href="{% url 'shortlink:create_secure_link' %}">Create secure link</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'shortlink:about_the_project' %}">About the project</a>
-                        <a class="dropdown-item" href="{% url 'shortlink:contact_us' %}">Contact us</a>
+{#<nav class="navbar navbar-expand-md navbar-dark bg-dark">#}
+{#    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">#}
+{#        <ul class="navbar-nav mr-auto">#}
+{#            {% if user.is_authenticated %}#}
+{#                <div class="btn-group">#}
+{#                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"#}
+{#                            aria-haspopup="true" aria-expanded="false">#}
+{#                        Menu#}
+{#                    </button>#}
+{#                    <div class="dropdown-menu">#}
+{#                        <a class="dropdown-item" href="{% url 'shortlink:index' %}">Home</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="{% url 'shortlink:manage_domains' %}">Manage domains</a>#}
+{#                        <a class="dropdown-item" href="{% url 'shortlink:create_utm' %}">Create UTM link</a>#}
+{#                        <a class="dropdown-item" href="{% url 'shortlink:create_secure_link' %}">Create secure link</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="{% url 'shortlink:about_the_project' %}">About the project</a>#}
+{#                        <a class="dropdown-item" href="{% url 'shortlink:contact_us' %}">Contact us</a>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            {% else %}#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{% url 'shortlink:about_the_project' %}">About the project</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{% url 'shortlink:contact_us' %}">Contact us</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#        </ul>#}
+{#    </div>#}
+{#    <div class="mx-auto order-0" align="center">#}
+{#        <a class="navbar-brand mx-auto" href="{% url 'shortlink:index' %}">#}
+{#            <img class="img" src="{% static 'shortlink/img/logo.png' %}"/>#}
+{#        </a>#}
+{#    </div>#}
+{#    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">#}
+{#        <ul class="navbar-nav ml-auto">#}
+{#            {% if user.is_authenticated %}#}
+{#                <span class="navbar-text">#}
+{#                    <a href="{% url 'account_email' %}">{{ user.username }}</a>#}
+{#                </span>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{% url 'account_logout' %}">log out</a>#}
+{#                </li>#}
+{##}
+{#            {% else %}#}
+{##}
+{#                <h6><a class="nav-link" href="{% url 'account_login' %}">log in</a></h6>#}
+{#                <h6><a class="nav-link" href="{% url 'account_signup' %}">sign up</a></h6>#}
+{##}
+{#            {% endif %}#}
+{#        </ul>#}
+{#    </div>#}
+{#</nav>#}
+{#<nav class="navbar navbar-expand navbar-dark bg-dark">#}
+{#    <div class="navbar-collapse collapse" id="mynavbar">#}
+{#        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">#}
+{#            <ul class="navbar-nav mr-auto">#}
+{#                {% if user.is_authenticated %}#}
+{#                    <div class="btn-group">#}
+{#                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"#}
+{#                                aria-haspopup="true" aria-expanded="false">#}
+{#                            Menu#}
+{#                        </button>#}
+{#                        <div class="dropdown-menu">#}
+{#                            <a class="dropdown-item" href="{% url 'shortlink:index' %}">Home</a>#}
+{#                            <div class="dropdown-divider"></div>#}
+{#                            <a class="dropdown-item" href="{% url 'shortlink:manage_domains' %}">Manage domains</a>#}
+{#                            <a class="dropdown-item" href="{% url 'shortlink:create_utm' %}">Create UTM link</a>#}
+{#                            <a class="dropdown-item" href="{% url 'shortlink:create_secure_link' %}">Create secure link</a>#}
+{#                            <div class="dropdown-divider"></div>#}
+{#                            <a class="dropdown-item" href="{% url 'shortlink:about_the_project' %}">About the project</a>#}
+{#                            <a class="dropdown-item" href="{% url 'shortlink:contact_us' %}">Contact us</a>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% else %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'shortlink:about_the_project' %}">about</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'shortlink:contact_us' %}">contacts</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{##}
+{##}
+{#        <div class="mx-auto order-0" align="center">#}
+{#            <a class="navbar-brand mx-auto" href="{% url 'shortlink:index' %}">#}
+{#                <img class="img" src="{% static 'shortlink/img/logo.png' %}"/>#}
+{#            </a>#}
+{#        </div>#}
+{##}
+{#        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">#}
+{#            <ul class="navbar-nav ml-auto">#}
+{#                {% if user.is_authenticated %}#}
+{#                    <span class="navbar-text">#}
+{#                        <a href="{% url 'account_email' %}">{{ user.username }}</a>#}
+{#                    </span>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'account_logout' %}">log out</a>#}
+{#                    </li>#}
+{##}
+{#                {% else %}#}
+{##}
+{#                    <h6><a class="nav-link" href="{% url 'account_login' %}">log in</a></h6>#}
+{#                    <h6><a class="nav-link" href="{% url 'account_signup' %}">sign up</a></h6>#}
+{##}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{#        <ul class="navbar-nav w-100 justify-content-end">#}
+{#            <li class="nav-item">#}
+{#                 <div class="btn-group">#}
+{#                    <a class="btn nav-link dropdown-toggle" data-toggle="dropdown"#}
+{#                        href="#" role="button" aria-haspopup="true" aria-expanded="false">#}
+{#                        <i class="fa fa-plus" aria-hidden="true"></i>#}
+{#                    </a>#}
+{#                    <div class="dropdown-menu dropdown-menu-right">#}
+{#                        <a class="dropdown-item" href="#">Action</a> <a#}
+{#                            class="dropdown-item" href="#">Another action</a> <a#}
+{#                            class="dropdown-item" href="#">Something else here</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </li>#}
+{#        </ul>#}
+{#    </div>#}
+{#</nav>#}
+{##}
+{##}
+{##}
+{#<nav class="navbar navbar-expand navbar-dark bg-dark">#}
+{#  <a class="navbar-brand mx-auto" href="{% url 'shortlink:index' %}">#}
+{#      <img class="img" src="{% static 'shortlink/img/logo.png' %}"/>#}
+{#  </a>#}
+{#  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">#}
+{#    <span class="navbar-toggler-icon"></span>#}
+{#  </button>#}
+{##}
+{#  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">#}
+{#    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">#}
+{#      <li class="nav-item active">#}
+{#        <a class="dropdown-item" href="{% url 'shortlink:index' %}">Home</a>#}
+{#      </li>#}
+{##}
+{#    </ul>#}
+{#    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">#}
+{#        <ul class="navbar-nav ml-auto">#}
+{#            {% if user.is_authenticated %}#}
+{#                <span class="navbar-text">#}
+{#                    <a href="{% url 'account_email' %}">{{ user.username }}</a>#}
+{#                </span>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{% url 'account_logout' %}">log out</a>#}
+{#                </li>#}
+{##}
+{#            {% else %}#}
+{##}
+{#                <h6><a class="nav-link" href="{% url 'account_login' %}">log in</a></h6>#}
+{#                <h6><a class="nav-link" href="{% url 'account_signup' %}">sign up</a></h6>#}
+{##}
+{#            {% endif %}#}
+{#        </ul>#}
+{#    </div>#}
+{#  </div>#}
+{#</nav>#}
 
-                    </div>
-                </div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'shortlink:index' %}">
+        <img class="img" src="{% static 'shortlink/img/logo.png' %}"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'shortlink:index' %}">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shortlink:manage_domains' %}">Domains</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shortlink:create_utm' %}">UTM&nbsp;link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shortlink:create_secure_link' %}">Secure&nbsp;link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shortlink:about_the_project' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shortlink:contact_us' %}">Contacts</a>
+                </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shortlink:about_the_project' %}">About the project</a>
+                    <a class="nav-link" href="{% url 'shortlink:about_the_project' %}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shortlink:contact_us' %}">Contact us</a>
+                    <a class="nav-link" href="{% url 'shortlink:contact_us' %}">Contacts</a>
                 </li>
             {% endif %}
+
         </ul>
-    </div>
-    <div class="mx-auto order-0" align="center">
-        <a class="navbar-brand mx-auto" href="{% url 'shortlink:index' %}">
-            <img class="img" src="{% static 'shortlink/img/logo.png' %}"/>
-        </a>
-    </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <span class="navbar-text">
@@ -53,5 +228,6 @@
 
             {% endif %}
         </ul>
+
     </div>
 </nav>

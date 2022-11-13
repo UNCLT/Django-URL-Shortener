@@ -3,34 +3,40 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<main role="main" class="container">
+    <br>
+    <h4>Edit link</h4>
+    <br>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <form method="post">
+                {% csrf_token %}
+
+                        {{ form|crispy }}
 
 
-    <form method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-3">
-                {{ form|crispy }}
-            </div>
+                        Short link: http://ya.link/{{ link.slug }}
+
+                <br>
+                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <button class="btn btn-warning" type="submit">
+                                update
+                            </button>
+                        </td>
+                        <td>
+                            <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
+                               aria-pressed="true">back to URLs</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
-        <div class="row">
-            <div class="col-3">
-                Short link: http://ya.link/{{ link.slug }}
-            </div>
-        </div>
-        <br>
-        <table>
-            <tr>
-                <td>
-                    <button class="btn btn-warning" type="submit">
-                        update
-                    </button>
-                </td>
-                <td>
-                    <a href="{% url 'shortlink:index' %}" class="btn btn-secondary active" role="button"
-                       aria-pressed="true">back to URLs</a>
-                </td>
-            </tr>
-        </table>
-    </form>
+        <div class="col-sm-3"></div>
+    </div>
+</main>
 
 {% endblock content %}

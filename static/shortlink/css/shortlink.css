@@ -14,12 +14,36 @@ a.sourcelink {
     display: inline-block;
 }
 
+a.sourcelink-mobile {
+    color: #212529;
+    max-width: 200px; /* Ширина поля */
+    width: 200px;
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    background: #e0dcdc; /* Цвет фона */
+    padding: 5px; /* Поля вокруг текста */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    display: inline-block;
+}
+
 a.sourcelink:hover {
     color: #5a636b;
     text-decoration: none;
 }
 
 a.shortlink {
+    color: #212529;
+    max-width: 200px;
+    width: 200px; /* Ширина поля */
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    background: #b8adad; /* Цвет фона */
+    padding: 5px; /* Поля вокруг текста */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    display: inline-block;
+}
+
+a.shortlink-mobile {
     color: #212529;
     max-width: 200px;
     width: 200px; /* Ширина поля */

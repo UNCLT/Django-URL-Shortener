@@ -9,50 +9,39 @@
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
+
+
 {% block content %}
-    <div class="clear" style="height: 40px;"></div>
-    <table style="width: 100%;">
-        <tr>
-            <td align="center">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{% static 'shortlink/img/card1.png' %}"
-                         alt="Card image cap"/>
-                    <div class="card-body">
-                        <p class="card-text">Free permanent short URLs. Need customization? Add custom domains
-                            for your links!</p>
-                    </div>
+    {% if not request.user_agent.is_mobile %}
+        <main role="main" class="container">
+            <div class="clear" style="height: 40px;"></div>
+            <div class="card-deck">
+                <div class="card">
+                <img src="{% static 'shortlink/img/card1.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Free permanent short URLs. Need customization? Add custom domains for your links!</p>
                 </div>
-            </td>
+                </div>
+                <div class="card">
+                <img src="{% static 'shortlink/img/card2.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Built in UTM link generator. Launch campaign and shorten the result link.</p>
+                </div>
+                </div>
+                <div class="card">
+                <img src="{% static 'shortlink/img/card3.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Secure links. Share access to your sensitive data with further guaranteed removal.</p>
+                </div>
+                </div>
+            </div>
 
-            <td align="center">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{% static 'shortlink/img/card2.png' %}"
-                         alt="Card image cap"/>
-                    <div class="card-body">
-                        <p class="card-text">Built in UTM link generator. Launch campaign and
-                            immediately
-                            shorten the result link.</p>
-                    </div>
-                </div>
-            </td>
+            <br>
 
-            <td align="center">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{% static 'shortlink/img/card3.png' %}"
-                         alt="Card image cap"/>
-                    <div class="card-body">
-                        <p class="card-text">Secure links. Share access to your sensitive data
-                            with further guaranteed removal.</p>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <br>
-    <table style="width: 100%">
-        <tr style="width: 100%";>
-            <td class="box with-linear-gradient">
-                <div class="container" style="width: 400px;">
+
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
                     <br>
                     <h1>{% trans "Sign In" %}</h1>
 
@@ -92,14 +81,18 @@
                         <p>{% blocktrans %}If you have not created an account yet, then please
                             <a href="{{ signup_url }}">sign up</a>first.{% endblocktrans %}</p>
                     {% endif %}
+                </div>
+                <div class="col-2"></div>
+            </div>
 
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
                     <form class="login" method="POST" action="{% url 'account_login' %}">
                         {% csrf_token %}
-                        <div class="row">
-                            <div class="col-8">
+
                                 {{ form|crispy }}
-                            </div>
-                        </div>
+
 
                         {% if redirect_field_value %}
                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
@@ -128,7 +121,137 @@
                         {% endblocktrans %}
                     </p>
                 </div>
-            </td>
-        </tr>
-    </table>
+                <div class="col-2"></div>
+            </div>
+        </main>
+    {% else %}
+        <main role="main" class="container">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'shortlink/img/card1.png' %}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First slide label</h5>
+                            <p>Some representative placeholder content for the first slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'shortlink/img/card2.png' %}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'shortlink/img/card3.png' %}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Third slide label</h5>
+                            <p>Some representative placeholder content for the third slide.</p>
+                        </div>
+                    </div>
+              </div>
+                <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </button>
+            </div>
+
+
+            <div class="row">
+                <div class="col-0"></div>
+                <div class="col-12">
+                    <br>
+                    <h1>{% trans "Sign In" %}</h1>
+
+                    {% get_providers as socialaccount_providers %}
+
+                    {% if socialaccount_providers %}
+                        <table>
+                            <tr>
+                                <td>
+                                    {% blocktrans with site.name as site_name %}Please sign in with Username and
+                                        Password or
+                                    {% endblocktrans %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <a class="btn btn-outline-dark" href="/accounts/google/login/" role="button"
+                                               style="text-transform:none">
+                                                <img width="20px" style="margin-bottom:3px; margin-right:5px"
+                                                     alt="Google sign-in"
+                                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>
+                                                Login with Google
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+
+                        {% include "socialaccount/snippets/login_extra.html" %}
+
+                    {% else %}
+                        <p>{% blocktrans %}If you have not created an account yet, then please
+                            <a href="{{ signup_url }}">sign up</a>first.{% endblocktrans %}</p>
+                    {% endif %}
+                </div>
+                <div class="col-0"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-0"></div>
+                <div class="col-12">
+                    <form class="login" method="POST" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+
+                                {{ form|crispy }}
+
+
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        <table>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-warning" type="submit">
+                                        {% trans "Sign In" %}
+                                    </button>
+                                </td>
+                                <td>
+                                    <a href="{% url 'account_reset_password' %}" class="btn btn-secondary active"
+                                       role="button"
+                                       aria-pressed="true">
+                                        {% trans "Forgot Password?" %}
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br>
+                    <p>
+                        {% blocktrans %}
+                            Don't have an account? Please <a href="{{ signup_url }}">sign up</a>.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+                <div class="col-0"></div>
+            </div>
+        </main>
+    {% endif %}
+
+
 {% endblock %}

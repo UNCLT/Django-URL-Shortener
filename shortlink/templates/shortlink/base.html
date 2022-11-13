@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="{% static 'shortlink/img/favicon.png' %}" type="image/png">
 
     <script src={% static 'shortlink/js/copy_link.js' %}></script>
-    <meta name="viewport" content="width=device-width", initial-scale=1.0>
+    <meta name="viewport" content="width=device-width" initial-scale=1.0>
     <title>My short URLs</title>
 
 </head>
@@ -23,20 +23,15 @@
 {% include 'shortlink/navbar.html' %}
 
 
-<main role="main" class="container">
-    <div class="pb-2 mb-2">
-        {% block page_header %}{% endblock page_header %}
-    </div>
+<main role="main" class="container.full-width">
 
-    <div>
+    {% include 'shortlink/messages.html' %}
+    {% block content %}{% endblock content %}
 
-        {% include 'shortlink/messages.html' %}
-        {% block content %}{% endblock content %}
-    </div>
     <div class="clear" style="height: 40px;"></div>
-    <div>
-        {% include 'shortlink/footer.html' %}
-    </div>
+
+    {% include 'shortlink/footer.html' %}
+
 </main>
 
 </body>

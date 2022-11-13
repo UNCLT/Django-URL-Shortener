@@ -4,9 +4,9 @@ from .models import Link, Domain, SecureLink
 
 
 class LinkForm(forms.ModelForm):
-    title = forms.CharField(label='Title (optional)', max_length=200, required=False)
+    title = forms.CharField(label='Title', max_length=200, required=False)
     source_link = forms.URLField(label='URL to shorten', max_length=2000)
-    slug = forms.CharField(label='Slug (optional) ya.link/YOUR_SLUG', max_length=50, required=False)
+    slug = forms.CharField(label='Slug (ya.link/YOUR_SLUG)', max_length=50, required=False)
 
     class Meta:
         model = Link
